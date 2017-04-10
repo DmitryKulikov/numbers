@@ -1,0 +1,15 @@
+<ion-view view-title="Угадай число">
+  <ion-content class="padding">
+    <div class="row">
+      <div class="col" >{{counter}}</div>
+      <div class="col" ng-show="message">{{message}}</div>
+    </div>
+    <div class="list">
+      <label class="item item-input">
+        <input type="number" placeholder="Введите число" ng-model="number">
+      </label>
+      <button class="button button-block button-positive" ng-click="getNumber(number)" ng-disabled="stopPlaying">Угадать</button>
+      <button ng-show="newGame" ng-click = "startGame()"class="button button-block button-positive">Новая игра</button>
+    </div>
+  </ion-content>
+</ion-view>
