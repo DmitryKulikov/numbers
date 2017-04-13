@@ -1,6 +1,13 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, $ionicModal, Records) {
+
+  $ionicModal.fromTemplateUrl('my-modal.html', {
+    scope: $scope,
+    animation: 'slide-in-up'
+  }).then(function(modal) {
+    $scope.modal = modal;
+  });
   
   var computerNumber,
       counter,
@@ -10,6 +17,12 @@ angular.module('starter.controllers', [])
     range: 10,
     atempts: 5
   };
+
+  function init() {
+    $scope.stopPlaying = true;
+    $scope.newGame = true;
+    $scope.counter = settings.atempts;
+  }
 
   $scope.counter = settings.atempts;
 
@@ -23,15 +36,14 @@ angular.module('starter.controllers', [])
   
 
   function gameOver() {
-    $scope.stopPlaying = true;
-    $scope.newGame = true;
-    $scope.counter = settings.atempts;    
+    init();
+    $scope.message = "Вы проиграли";    
   }
 
   function win() {
-    $scope.stopPlaying = true;
-    $scope.newGame = true;
-    $scope.counter = settings.atempts; 
+    init();
+    $scope.message = "Вы выйграли";
+    $scope.modal.show(); 
   }
 
 
@@ -39,7 +51,6 @@ angular.module('starter.controllers', [])
   function playGame(number) {
       $scope.counter--
       if (number == $scope.computerNumber) {
-        $scope.message = "Вы выйграли";
         win();
       } else {
         if ($scope.computerNumber > number) {
@@ -66,6 +77,7 @@ angular.module('starter.controllers', [])
 
   $scope.startGame = function(){
     getNumber();
+    $scope.message = "";
     $scope.stopPlaying = false;
     $scope.newGame = false;
   }
@@ -74,13 +86,21 @@ angular.module('starter.controllers', [])
       checkUserInput(number);    
   };
 
+  $scope.insertToTable = function(name){
+    if (name) {
+      Records.setRecords(name, $scope.counter);
+      $scope.modal.hide();
+    }
+  }
+
 })
 
-.controller('ChatsCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  };
+.controller('ChatsCtrl', function($scope, Records, $window) {
+  console.log($window.localStorage.getItem('myKey'));
+  $scope.records = Records.getRecords();
+  // $scope.remove = function(chat) {
+  //   Chats.remove(chat);
+  // };
 })
 
 .controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {

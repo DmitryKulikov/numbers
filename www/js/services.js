@@ -47,4 +47,24 @@ angular.module('starter.services', [])
       return null;
     }
   };
+})
+
+.service('Records', function(){
+    var vm = this;
+    var records = [];
+    
+    vm.setRecords = function(name, atempts) {
+        
+        record = {
+          'name': name,
+          'atempts': atempts
+        };
+        
+        records.push(record);
+    }
+
+
+    vm.getRecords = function(){
+        return records;
+    }
 });

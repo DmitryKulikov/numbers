@@ -1,12 +1,10 @@
-<ion-view view-title="Chats">
+<ion-view view-title="Таблица рекордов">
   <ion-content>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="chat in chats" type="item-text-wrap" href="#/tab/chats/{{chat.id}}">
-        <img ng-src="{{chat.face}}">
-        <h2>{{chat.name}}</h2>
-        <p>{{chat.lastText}}</p>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="record in records" type="item-text-wrap">
+        <h2>Имя {{record.name}}</h2>
+        <p>Количество поппыток {{record.atempts}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
-
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
           Delete
         </ion-option-button>

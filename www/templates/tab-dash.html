@@ -11,5 +11,21 @@
       <button class="button button-block button-positive" ng-click="getNumber(number)" ng-disabled="stopPlaying">Угадать</button>
       <button ng-show="newGame" ng-click = "startGame()"class="button button-block button-positive">Новая игра</button>
     </div>
+    <script id="my-modal.html" type="text/ng-template">
+      <ion-modal-view>
+        <ion-header-bar>
+          <h1 class="title">Таблица рекордов</h1>
+          <button class="button" ng-click="modal.hide()">Закрыть</button>
+        </ion-header-bar>
+        <ion-content>
+          <p>Вы попали в таблицу рекордов</p>
+          <p>Вы выйграли игру за {{counter}} попыток</p>
+          <label class="item item-input">
+            <input type="text" placeholder="Ваше имя" ng-model="name">
+          </label>
+          <button class="button button-block button-positive" ng-click="insertToTable(name)">Отправить</button>
+        </ion-content>
+      </ion-modal-view>
+    </script>
   </ion-content>
 </ion-view>
